@@ -29,3 +29,7 @@
     height: 2vw;
     width: 2vw;
 }
+.question_div {
+    border: 1px solid rgba(222,226,230,1);
+    padding: 0.5rem 1rem 1rem 1rem;
+}

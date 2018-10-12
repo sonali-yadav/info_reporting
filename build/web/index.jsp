@@ -9,9 +9,8 @@
 <%@include file="connection.jsp" %>
 <header>
     <div class="title_div center capital"><div class="h2">How To Start</div></div>
-    <div class="button_div flex_box">
+    <div class="button_div">
         <a href="#acad_instructor" class="btn btn-outline-light">Academic for Instructor</a>
-        <a href="#add_entry" class="btn btn-outline-light">Add Entry</a>
     </div>
 </header>
 <main>
@@ -30,19 +29,20 @@
             <%  
                 try {
                 Connection con = (Connection)session.getAttribute("conn");
-                PreparedStatement st = con.prepareStatement("select pk,sr_no,title,guide_ppt from guides_master order by sr_no;");
+                PreparedStatement st = con.prepareStatement("select sr_no,title,guide_ppt from guides_master where group_id=1 order by sr_no;");
                 ResultSet rs = st.executeQuery();
                 while(rs.next()){
             %>
             <tr>
                 <td><%=rs.getString("guides_master.sr_no")%> </td>
                 <td><%=rs.getString("guides_master.title")%> </td>
+                <% String s=rs.getString("guides_master.sr_no");%>
                 <td>
                     <a href="<%=rs.getString("guides_master.guide_ppt")%>" target="_blank">
                         <img src="images/ppt_icon2.png" alt="PPT" class="ppt_icon">
                     </a>
                 </td>
-                <td><a>FAQs</a></td>
+                <td><a target="_blank" href=<%= "\"faq.jsp?srno="+ rs.getString("guides_master.sr_no")+"\""%>>FAQs</a></td>
             </tr>
             <%}       
                 st.close();
@@ -72,7 +72,7 @@
                 <%  
                     try {
                     Connection con = (Connection)session.getAttribute("conn");
-                    PreparedStatement st = con.prepareStatement("select pk,sr_no,title,guide_ppt from guides_master;");
+                    PreparedStatement st = con.prepareStatement("select sr_no,title,guide_ppt from guides_master where group_id=2 order by sr_no;");
                     ResultSet rs = st.executeQuery();
                     while(rs.next()){
                 %>
@@ -84,7 +84,7 @@
                             <img src="images/ppt_icon2.png" alt="PPT" class="ppt_icon">
                         </a>
                     </td>
-                    <td><a>FAQs</a></td>
+                    <td><a target="_blank" href=<%= "\"faq.jsp?srno="+ rs.getString("guides_master.sr_no")+"\""%>>FAQs</a></td>
                 </tr>
                 <%}       
                     st.close();
@@ -97,13 +97,6 @@
                 %>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <div id="add_entry">
-        <div class="h3 center capital subtitle_div">Add an Entry</div>
-        <div>
-            <form name="add_entry_form" action="add_entry.jsp" method="POST">
-            </form>
         </div>
     </div>
 </main>
