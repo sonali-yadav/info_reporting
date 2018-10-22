@@ -3,6 +3,10 @@
     padding: 0;
     font-family: 'Open Sans', sans-serif;
 }
+@font-face {
+    font-family: "Raleway";
+    src: url("fonts/raleway/Raleway-Regular.ttf") format("truetype");
+}
 .center {
     text-align: center;
 }
@@ -10,27 +14,115 @@
     text-transform: uppercase;
 }
 .title_div {
-    padding: 5px 0;
-    background-color: #152642;
+    padding: 0.8em 0 0.8em 2em;
+    background-color: rgba(214,70,53,1);
     color: #ffffff;
-}
-.button_div {
-    background-color: rgba(16, 50, 104, 0.75);
-    padding: 0.5rem 1rem 0.5rem 0;
-    text-align: right;
+    font-size: 1.1em;
+    /*border-top: 3px solid  rgba(61,61,61,1);*/
+    border-bottom: 5px solid  rgba(61,61,61,1);
 }
 .table_div {
-    width: 80%;
     margin: auto;
-}
-.subtitle_div {
-    margin: 1.5rem 0;
+    border: 1px solid rgba(75,141,248,1);
 }
 .ppt_icon {
     height: 2vw;
     width: 2vw;
 }
-.question_div {
-    border: 1px solid rgba(222,226,230,1);
-    padding: 0.5rem 1rem 1rem 1rem;
+.nav_list li {
+	padding: 0.5em 2em;
+	border-bottom: 1px solid rgba(75,75,75,1);
+}
+.nav_list li:hover {
+	background-color: rgba(214,70,53,0.75);
+}
+.nav_list li:hover a {
+	color: #fff;
+}
+#navbar {
+	position: fixed;
+  	height: 100%;
+  	overflow: auto;
+	width: 20%;
+	border-right: 1px solid #f0f0f0;
+	background-color: rgba(61,61,61,1);
+	}
+#navbar ul {
+	overflow-y: auto; 
+}
+#main-doc {
+	padding: 10px 20px;
+	width: 77%;
+	margin-left: 20%;
+	height: 100%;
+        /*background-color: #f0f0f0;*/
+}
+#navbar, #main-doc {
+	float: left;
+	overflow: auto;
+}
+.list_item {
+    text-decoration: none;
+    color: #fff;
+}
+.tables {
+    border: 1px solid #cacaca;
+    width: 96%;
+    margin: 1em auto;
+    text-align: center;
+}
+table, td, th {
+    border-collapse: collapse;
+}
+tr {
+    border-bottom: 1px solid #cacaca;
+}
+th, td {
+    padding: 0.5em;
+    border-left: 1px solid #cacaca;
+    border-right: 1px solid #cacaca;
+}
+th {
+    background-color: rgba(240,240,240,0.3);
+    color: rgba(61,61,61,1);
+}
+.table_header {
+    background-color: rgba(75,141,248,1);
+    color: #fff;
+    padding: 0.5em;
+    font: 1.2em 'Raleway';
+}
+.faq_btn {
+    padding: 0.3em 1em;
+    /*background-color: rgba(214,70,53,1);*/
+    background-color: rgba(103,193,0,1);
+    border-radius: 3px;
+    font-size: 14px;
+}
+.add_icon {
+    height: 2vw;
+    width: 2vw;
+    float: right;
+}
+.add_new_title_div {
+    padding: 1em;
+}
+@media screen and (max-width: 700px) {
+  #navbar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  #navbar ul li a {float: left;}
+  #main-doc {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  #navbar ul li a {
+    text-align: center;
+    float: none;
+  }
+  #main-doc {
+  	width: 100%;
+  }
 }
