@@ -65,20 +65,15 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>How To Start</title>\n");
-      out.write("        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" \n");
-      out.write("              integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" \n");
-      out.write("              crossorigin=\"anonymous\">\n");
-      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n");
-      out.write("        <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n");
-      out.write("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js\" integrity=\"sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49\" crossorigin=\"anonymous\"></script>\n");
-      out.write("<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js\" integrity=\"sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy\" crossorigin=\"anonymous\"></script>\n");
-      out.write("    </head>\n");
+      out.write("        <title>Guides</title>\n");
+      out.write("        <link href=\"https://fonts.googleapis.com/css?family=Open+Sans\" rel=\"stylesheet\">\n");
+      out.write("        <link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">\n");
+      out.write("        </head>\n");
       out.write("    <body>\n");
       out.write("        ");
 
             try{
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/guides_db","admin","tiger");
                 session.setAttribute("conn", conn);
                 }
@@ -92,104 +87,71 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("<header>\n");
       out.write("    <div class=\"title_div center capital\"><div class=\"h2\">How To Start</div></div>\n");
-      out.write("    <div class=\"button_div\">\n");
-      out.write("        <a href=\"#acad_instructor\" class=\"btn btn-outline-light\">Academic for Instructor</a>\n");
-      out.write("    </div>\n");
       out.write("</header>\n");
       out.write("<main>\n");
-      out.write("    <div class=\"h3 center capital subtitle_div\">Academic for Students</div>\n");
-      out.write("    <div class=\"table_div\">\n");
-      out.write("        <table class=\"table table-bordered table-responsive-sm table-hover\">\n");
-      out.write("            <thead>\n");
-      out.write("                <tr>\n");
-      out.write("                    <td><b>Sr No.</b></td>\n");
-      out.write("                    <td><b>Tilte</b></td>\n");
-      out.write("                    <td><b>PPT</b></td>\n");
-      out.write("                    <td><b>FAQs</b></td>\n");
-      out.write("                </tr>\n");
-      out.write("            </thead>\n");
-      out.write("            <tbody>\n");
+      out.write("    <section>\n");
+      out.write("        <ul>\n");
+      out.write("        ");
+ try {
+            Connection con=(Connection)session.getAttribute("conn");
+            PreparedStatement st=con.prepareStatement("select * from titles_tb");
+            ResultSet rs=st.executeQuery();
+            while(rs.next()) {
+      out.write("\n");
+      out.write("            <li><a href=\"");
+      out.print("index.jsp?head="+rs.getString("titles_tb.title_id"));
+      out.write('"');
+      out.write('>');
+      out.print(rs.getString("titles_tb.title_name"));
+      out.write("</a></li>\n");
       out.write("            ");
-  
-                try {
-                Connection con = (Connection)session.getAttribute("conn");
-                PreparedStatement st = con.prepareStatement("select sr_no,title,guide_ppt from guides_master where group_id=1 order by sr_no;");
-                ResultSet rs = st.executeQuery();
-                while(rs.next()){
-            
+ }
       out.write("\n");
-      out.write("            <tr>\n");
-      out.write("                <td>");
-      out.print(rs.getString("guides_master.sr_no"));
-      out.write(" </td>\n");
-      out.write("                <td>");
-      out.print(rs.getString("guides_master.title"));
-      out.write(" </td>\n");
-      out.write("                ");
- String s=rs.getString("guides_master.sr_no");
-      out.write("\n");
-      out.write("                <td>\n");
-      out.write("                    <a href=\"");
-      out.print(rs.getString("guides_master.guide_ppt"));
-      out.write("\" target=\"_blank\">\n");
-      out.write("                        <img src=\"images/ppt_icon2.png\" alt=\"PPT\" class=\"ppt_icon\">\n");
-      out.write("                    </a>\n");
-      out.write("                </td>\n");
-      out.write("                <td><a target=\"_blank\" href=");
-      out.print( "\"faq.jsp?srno="+ rs.getString("guides_master.sr_no")+"\"");
-      out.write(">FAQs</a></td>\n");
-      out.write("            </tr>\n");
-      out.write("            ");
-}       
-                st.close();
-                rs.close();
-            }
-            catch(Exception e)
-            {
-                    System.out.println("Error: "+e);
-            }
-            
-      out.write("\n");
-      out.write("            </tbody>\n");
-      out.write("        </table>\n");
-      out.write("    </div>\n");
-      out.write("    <div id=\"acad_instructor\">\n");
-      out.write("        <div class=\"h3 center capital subtitle_div\">Academic for Instructor</div>\n");
-      out.write("        <div class=\"table_div\">\n");
-      out.write("            <table class=\"table table-bordered table-responsive-sm table-hover\">\n");
+      out.write("        </ul>\n");
+      out.write("    </section>\n");
+      out.write("    <section>\n");
+      out.write("        <div class=\"table_div\" style=\"border:1px solid #cacaca;\">\n");
+      out.write("            <table border=\"1\">\n");
       out.write("                <thead>\n");
       out.write("                    <tr>\n");
-      out.write("                        <td><b>Sr No.</b></td>\n");
-      out.write("                        <td><b>Tilte</b></td>\n");
-      out.write("                        <td><b>PPT</b></td>\n");
-      out.write("                        <td><b>FAQs</b></td>\n");
+      out.write("                        <th>Title Name</th>\n");
+      out.write("                        <th>PPT</th>\n");
+      out.write("                        <th>Last Updated</th>\n");
+      out.write("                        <th>FAQs</th>\n");
       out.write("                    </tr>\n");
       out.write("                </thead>\n");
       out.write("                <tbody>\n");
       out.write("                ");
-  
-                    try {
-                    Connection con = (Connection)session.getAttribute("conn");
-                    PreparedStatement st = con.prepareStatement("select sr_no,title,guide_ppt from guides_master where group_id=2 order by sr_no;");
-                    ResultSet rs = st.executeQuery();
-                    while(rs.next()){
+ String title_id=request.getParameter("head");
+                //out.println("1");
+                PreparedStatement st1 = con.prepareStatement("select sub_name,last_modified,sub_doc,faq_doc from subtitles_tb where title_id="+title_id);
+                //out.println("2");
+                ResultSet rs1 = st1.executeQuery();
+                //out.println("3");
+                while(rs1.next()){
                 
       out.write("\n");
       out.write("                <tr>\n");
       out.write("                    <td>");
-      out.print(rs.getString("guides_master.sr_no"));
-      out.write(" </td>\n");
-      out.write("                    <td>");
-      out.print(rs.getString("guides_master.title"));
+      out.print(rs1.getString("subtitles_tb.sub_name"));
       out.write(" </td>\n");
       out.write("                    <td>\n");
       out.write("                        <a href=\"");
-      out.print(rs.getString("guides_master.guide_ppt"));
+      out.print(rs1.getString("subtitles_tb.sub_doc"));
       out.write("\" target=\"_blank\">\n");
       out.write("                            <img src=\"images/ppt_icon2.png\" alt=\"PPT\" class=\"ppt_icon\">\n");
       out.write("                        </a>\n");
       out.write("                    </td>\n");
-      out.write("                    <td><a>FAQs</a></td>\n");
+      out.write("                    <td>");
+      out.print(rs.getString("subtitles_tb.last_modified"));
+      out.write(" </td>\n");
+      out.write("                    <td>\n");
+      out.write("                        <a href=\"");
+      out.print(rs1.getString("subtitles_tb.faq_doc"));
+      out.write("\" target=\"_blank\">\n");
+      out.write("                            <img src=\"images/ppt_icon2.png\" alt=\"PPT\" class=\"ppt_icon\">\n");
+      out.write("                        </a>\n");
+      out.write("                    </td>\n");
       out.write("                </tr>\n");
       out.write("                ");
 }       
@@ -205,7 +167,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </tbody>\n");
       out.write("            </table>\n");
       out.write("        </div>\n");
-      out.write("    </div>\n");
+      out.write("    </section>\n");
       out.write("</main>");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
