@@ -38,7 +38,7 @@
             else {%>
                 <div class="table_header">
                     <%=request.getParameter("title")%>
-                    <a href="add_new.jsp"><img src="images/add_icon.png" alt="ADD" class="add_icon" title="Add New"></a>
+                    <a href="<%="add_new.jsp?title="+request.getParameter("title")+"&head="+request.getParameter("head")%>"><img src="images/add_icon.png" alt="ADD" class="add_icon" title="Add New"></a>
                 </div>
             <%}
             %>

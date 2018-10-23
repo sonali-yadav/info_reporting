@@ -129,6 +129,13 @@ th {
 .form_container_div {
     padding: 2em;
 }
+input[type=text] {
+    width: 30em;
+    border: 1px solid #cacaca;
+    border-radius: 2px;
+    height: 2em;
+    padding-left: 5px;
+}
 #submit_btn {
     border: 1px solid rgba(103,193,0,1);
     width: 7rem;
