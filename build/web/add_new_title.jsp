@@ -29,5 +29,36 @@
     </div>-->
     </nav>
     <main id="main-doc">
-        <div>Add A New Category</div>
+        <div class="table_div">
+            <div class="table_header capital">Add a new Category</div>
+            <div class="form_container_div center">
+                <form name="new_title_form" action="add_new_title.jsp" method="POST">
+                    <label for="category_name">Category Name:</label>
+                    <input type="text" name="category_name" id="category_name" required="required">
+                    <div><input class="faq_btn list_item" id="submit_btn" type="submit" value="Submit" name="submit_title"></div>
+                </form>
+            </div>
+        </div>
+        <%
+            try{
+                Connection c=(Connection)session.getAttribute("conn");
+                String tn=request.getParameter("category_name");
+                if(!(tn.equals(null)))
+                {
+                PreparedStatement st1=c.prepareStatement("insert into titles_tb(title_name) values('"+tn+"')");
+                int r=st1.executeUpdate();
+                if(r==1){
+        %>
+        <div>Successfully added.</div>
+        <%
+                }
+else {
+            %>
+            <div>There was some problem. Please check your input and try again.</div>
+        <%
+            } }
+}           catch(Exception e){ 
+//out.println("Error: "+e);
+}
+        %>
     </main>

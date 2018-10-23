@@ -61,7 +61,7 @@
                     <td><%=rs1.getString("subtitles_tb.sub_name")%> </td>
                     <td>
                         <a href="<%=rs1.getString("subtitles_tb.sub_doc")%>" target="_blank">
-                            <img src="images/doc_icon2.png" alt="PPT" class="ppt_icon">
+                            <img src="images/pdf_icon.png" alt="PPT" class="ppt_icon">
                         </a>
                     </td>
                     <td><%=rs1.getString("subtitles_tb.last_modified")%></td>

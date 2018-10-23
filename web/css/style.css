@@ -126,3 +126,15 @@ th {
   	width: 100%;
   }
 }
+.form_container_div {
+    padding: 2em;
+}
+#submit_btn {
+    border: 1px solid rgba(103,193,0,1);
+    width: 7rem;
+    margin-top: 2rem;
+    transition: all .3s ease-in-out;
+}
+#submit_btn:hover {
+    background-color: rgba(64,118,3,1);
+}
