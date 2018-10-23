@@ -136,15 +136,35 @@ input[type=text] {
     height: 2em;
     padding-left: 5px;
 }
+#srch_btn {
+    background-color: rgba(103,193,0,1);
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+.in_block {
+    display: inline-block;
+}
 #submit_btn {
-    border: 1px solid rgba(103,193,0,1);
     width: 7rem;
+    border: 1px solid rgba(103,193,0,1);
     margin-top: 2rem;
-    transition: all .3s ease-in-out;
 }
 #submit_btn:hover {
     background-color: rgba(64,118,3,1);
 }
 label {
     color: rgba(61,61,61,1);
+}
+#search_bar {
+    width: 11rem;
+    height: 2rem;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(75,75,75,1);
+}
+.search_div {
+    padding: 1em 0 1em 2em;
 }

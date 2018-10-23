@@ -11,12 +11,26 @@
     <div class="title_div capital"><a class="list_item" href="index.jsp">How To Start</a></div>
 </header>
 <nav id="navbar">
+    <div class="search_div">
+        <form action="index.jsp">
+            <input type="text" id="search_bar" placeholder="Search.." name="search">
+            <button type="submit" id="srch_btn"><span class="fa fa-search" style="color:#fff;"></span></button>
+        </form>
+    </div>
     <ul class="nav_list">
-        <% try {
+        <% String srch=request.getParameter("search");
+        ResultSet rs;
+        PreparedStatement st;
+            try {
                 Connection con = (Connection) session.getAttribute("conn");
-                PreparedStatement st = con.prepareStatement("select * from titles_tb");
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {%>
+                if(srch==null){
+                st = con.prepareStatement("select * from titles_tb");
+                }
+                else {
+                st = con.prepareStatement("select * from titles_tb where title_name like '%"+srch+"%'");
+                }
+                rs = st.executeQuery();
+                while(rs.next()) {%>
         <li><a class="list_item" href="<%="index.jsp?head=" + rs.getString("titles_tb.title_id") + "&title=" + rs.getString("titles_tb.title_name")%>"><%=rs.getString("titles_tb.title_name")%></a></li>
             <% }
                 st.close();
