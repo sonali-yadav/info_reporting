@@ -25,7 +25,7 @@
     margin: auto;
     border: 1px solid rgba(75,141,248,1);
 }
-.ppt_icon {
+.pdf_icon {
     height: 2vw;
     width: 2vw;
 }
@@ -144,4 +144,7 @@ input[type=text] {
 }
 #submit_btn:hover {
     background-color: rgba(64,118,3,1);
+}
+label {
+    color: rgba(61,61,61,1);
 }
