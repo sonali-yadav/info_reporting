@@ -19,7 +19,11 @@
                 String head = request.getParameter("head");
                 while (rs.next()) {%>
         <li>
-            <a class="list_item" href="<%="index.jsp?head=" + rs.getString("titles_tb.title_id") + "&title=" + rs.getString("titles_tb.title_name")%>"><%=rs.getString("titles_tb.title_name")%></a>
+            <form action="home.jsp" name="title_form" method="POST">
+                <input type="hidden" name="title" value=<%=rs.getString("titles_tb.title_name")%>>
+                <input type="hidden" name="head" value=<%=rs.getString("titles_tb.title_id")%>>
+                <input type="submit" value="<%=rs.getString("titles_tb.title_name")%>" name="title_submit" class="list_item nav_links">
+            </form>
         </li>
         <% }
             st.close();
@@ -31,18 +35,19 @@
     </div>
 </nav>
 <main id="main-doc">
+    <section class="table_section">
     <div class="table_div">
-        <div class="table_header capital">Add a new record to <%=request.getParameter("title")%></div>
+        <div class="table_header capital"><span class="table_header_title">Add a new record to <%=request.getParameter("title")%></span></div>
         <div class="form_container_div">
             <form name="new_subtitle_form" action="add_new.jsp" method="POST">
-                <div><label for="description">Description:</label></div>
+                <div class="label_t"><label for="description">Description:</label></div>
                 <div><input type="text" name="description" id="description" required="required"></div>
-                <div><label for="doc_link">Link to Document:</label>
+                <div class="label_t"><label for="doc_link">Link to Document:</label>
                     <div><input type="text" name="doc_link" id="doc_link"></div>
-                    <div><label for="faq_link">Link to FAQ:</label>
+                    <div class="label_t"><label for="faq_link">Link to FAQ:</label>
                         <div><input type="text" name="faq_link" id="faq_link"></div>
-                        <input type="hidden" name="head" value=<%=head%>
-                               <div><label>Visible to? (Check all that apply)</label></div>
+                        <input type="hidden" name="head" value=<%=head%>>
+                               <div class="label_t"><label>Visible to? (Check all that apply)</label></div>
                         <div>
                             <div>
                                 <input type="checkbox" id="st" name="audience" value="s">
@@ -71,6 +76,12 @@
                     desc = request.getParameter("description");
                     ld = request.getParameter("doc_link");
                     lf = request.getParameter("faq_link");
+                    if(!(ld.equals(""))) {
+                        ld="'"+ld+"'";
+                    }
+                    if(!(lf.equals(""))) {
+                        lf="'"+lf+"'";
+                    }
                     if (ld.equals("")) {
                         ld = "NULL";
                     }
@@ -96,23 +107,19 @@
                     //out.println("access_code= " + access_code);
                     head = request.getParameter("head");
                     //out.println("head= " + head);
+                    
                     if (!(desc.equals(null) && head.equals(""))) {
-                        sql = "insert into subtitles_tb(sub_name,title_id,last_modified,access_code,sub_doc,faq_doc) values('" + desc + "'," + head + ",CURDATE()," + access_code + "," + ld + "," + lf + ")";
+                        sql = "insert into subtitles_tb(archived,sub_name,title_id,last_modified,time_modified,access_code,sub_doc,faq_doc) values(0,'" + desc + "'," + head + ",CURDATE(),NOW(),'" + access_code + "'," + ld + "," + lf + ")";
                         //out.println(sql);
                         PreparedStatement st1 = con.prepareStatement(sql);
                         int row = st1.executeUpdate();
-                        if (row == 1) {
-                %>
-                <div>Successfully added.</div>
-                <%
-                } else {
-                %>
-                <div>There was some problem. Please check your input and try again.</div>
-                <%
-                            }
+                        if(row==1)
+                            out.println("Success");
                         }
+                    response.sendRedirect("home.jsp");
                     } catch (Exception e) {
                         //out.println("Error: " + e);
                     }
                 %>
+                </section>
                 </main>

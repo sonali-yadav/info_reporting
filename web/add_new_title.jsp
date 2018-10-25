@@ -17,7 +17,13 @@
             PreparedStatement st=con.prepareStatement("select * from titles_tb");
             ResultSet rs=st.executeQuery();
             while(rs.next()) {%>
-        <li><a class="list_item" href="<%="index.jsp?head="+rs.getString("titles_tb.title_id")+"&title="+rs.getString("titles_tb.title_name")%>"><%=rs.getString("titles_tb.title_name")%></a></li>
+            <li>
+            <form action="home.jsp" name="title_form" method="POST">
+                <input type="hidden" name="title" value=<%=rs.getString("titles_tb.title_name")%>>
+                <input type="hidden" name="head" value=<%=rs.getString("titles_tb.title_id")%>>
+                <input type="submit" value="<%=rs.getString("titles_tb.title_name")%>" name="title_submit" class="list_item nav_links">
+            </form>
+            </li>
             <% }
             st.close();
             rs.close();
@@ -29,8 +35,9 @@
     </div>-->
     </nav>
     <main id="main-doc">
+        <section class="table_section">
         <div class="table_div">
-            <div class="table_header capital">Add a new Category</div>
+            <div class="table_header capital"><span class="table_header_title">Add a new Category</span></div>
             <div class="form_container_div center">
                 <form name="new_title_form" action="add_new_title.jsp" method="POST">
                     <label for="category_name">Category Name:</label>
@@ -51,6 +58,7 @@
         %>
         <div>Successfully added.</div>
         <%
+            response.sendRedirect("index.jsp");
                 }
 else {
             %>
@@ -61,4 +69,5 @@ else {
 //out.println("Error: "+e);
 }
         %>
+        </section>
     </main>
