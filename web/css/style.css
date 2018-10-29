@@ -187,6 +187,7 @@ label, .label_t {
 }
 .nav_links, #search_bar, #search_bar_top, .archive_link {
     background: transparent;
+    cursor: pointer;
 }
 #search_bar {
     border: 1px solid rgba(75,75,75,1);
