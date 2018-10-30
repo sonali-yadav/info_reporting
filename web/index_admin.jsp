@@ -12,5 +12,5 @@
     <div class="title_div capital"><a class="list_item" href="index.jsp">How To Start</a></div>
 </header>
 <%
-    response.sendRedirect("home_user.jsp");
+    response.sendRedirect("home.jsp");
 %>

@@ -20,7 +20,7 @@
         <%
             try{
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/guides_db","admin","tiger");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://172.20.160.35:3306/guides_db","root","11tk@Automation");
                 session.setAttribute("conn", conn);
                 }
             catch(Exception e) {
